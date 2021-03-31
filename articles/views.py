@@ -2,7 +2,7 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Article
-from articles.permissions import IsOwnerOrReadOnly
+from .permissions import IsAuthorOrReadOnly
 from .serializer import ArticleSerializer
 
 
@@ -13,6 +13,6 @@ class ArticleList(ListCreateAPIView):
 
 
 class ArticleDetail(RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthorOrReadOnly,)
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
